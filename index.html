@@ -12,27 +12,258 @@
         }
         
         body {
-            font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Playfair Display', 'Georgia', serif;
+            background: #0a0a0a;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
             overflow-x: hidden;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 107, 107, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(78, 205, 196, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(255, 184, 108, 0.1) 0%, transparent 50%);
+            animation: gradientShift 15s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
         
         .container {
-            max-width: 600px;
+            max-width: 500px;
             width: 100%;
-            background: white;
-            border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 40px;
+            box-shadow: 
+                0 30px 80px rgba(0,0,0,0.5),
+                inset 0 0 0 1px rgba(255,255,255,0.1);
             overflow: hidden;
-            animation: fadeIn 1s ease-out;
+            animation: fadeIn 1.2s ease-out;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 300px;
+            background: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 10px,
+                    rgba(255, 107, 107, 0.03) 10px,
+                    rgba(255, 107, 107, 0.03) 20px
+                );
+            pointer-events: none;
         }
         
         @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .header {
+            padding: 80px 40px 60px;
+            text-align: center;
+            position: relative;
+            background: 
+                linear-gradient(135deg, rgba(255, 107, 107, 0.15) 0%, rgba(78, 205, 196, 0.15) 100%),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 50px,
+                    rgba(255,255,255,0.02) 50px,
+                    rgba(255,255,255,0.02) 100px
+                );
+            border-bottom: 2px solid rgba(255, 107, 107, 0.2);
+        }
+        
+        .decorative-corner {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 3px solid rgba(255, 107, 107, 0.3);
+        }
+        
+        .corner-tl {
+            top: 20px;
+            left: 20px;
+            border-right: none;
+            border-bottom: none;
+        }
+        
+        .corner-tr {
+            top: 20px;
+            right: 20px;
+            border-left: none;
+            border-bottom: none;
+        }
+        
+        .corner-bl {
+            bottom: 20px;
+            left: 20px;
+            border-right: none;
+            border-top: none;
+        }
+        
+        .corner-br {
+            bottom: 20px;
+            right: 20px;
+            border-left: none;
+            border-top: none;
+        }
+        
+        .age-circle {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 30px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ffa502 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 
+                0 0 0 10px rgba(255, 107, 107, 0.1),
+                0 0 0 20px rgba(255, 107, 107, 0.05),
+                0 20px 40px rgba(255, 107, 107, 0.3);
+            animation: glow 3s ease-in-out infinite;
+        }
+        
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 
+                    0 0 0 10px rgba(255, 107, 107, 0.1),
+                    0 0 0 20px rgba(255, 107, 107, 0.05),
+                    0 20px 40px rgba(255, 107, 107, 0.3);
+            }
+            50% {
+                box-shadow: 
+                    0 0 0 15px rgba(255, 107, 107, 0.15),
+                    0 0 0 25px rgba(255, 107, 107, 0.08),
+                    0 25px 50px rgba(255, 107, 107, 0.4);
+            }
+        }
+        
+        .age-circle::before {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6b6b, #ffa502, #4ecdc4);
+            z-index: -1;
+            animation: rotate 4s linear infinite;
+            opacity: 0.5;
+        }
+        
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+        
+        .age-number {
+            font-size: 4em;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        .event-title {
+            color: #ff6b6b;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 10px rgba(255, 107, 107, 0.3);
+            letter-spacing: 3px;
+            animation: slideDown 1s ease-out;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .content {
+            padding: 50px 40px;
+            position: relative;
+        }
+        
+        .info-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out backwards;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.2);
+        }
+        
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 20px,
+                    rgba(255, 107, 107, 0.03) 20px,
+                    rgba(255, 107, 107, 0.03) 40px
+                );
+            pointer-events: none;
+        }
+        
+        .info-card:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+        
+        .info-card:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+        
+        .info-card:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+        
+        @keyframes fadeInUp {
             from {
                 opacity: 0;
                 transform: translateY(30px);
@@ -43,300 +274,198 @@
             }
         }
         
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 60px 30px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .header::before {
-            content: '🎉';
-            position: absolute;
-            font-size: 100px;
-            opacity: 0.1;
-            top: -20px;
-            left: -20px;
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        .header::after {
-            content: '🎂';
-            position: absolute;
-            font-size: 100px;
-            opacity: 0.1;
-            bottom: -20px;
-            right: -20px;
-            animation: float 3s ease-in-out infinite reverse;
-        }
-        
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
-        }
-        
-        .header h1 {
-            color: white;
+        .icon {
             font-size: 2.5em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-            animation: slideDown 0.8s ease-out;
-        }
-        
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .header p {
-            color: rgba(255,255,255,0.9);
-            font-size: 1.2em;
-            font-style: italic;
-        }
-        
-        .age-badge {
-            display: inline-block;
-            background: white;
-            color: #764ba2;
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-size: 3em;
-            font-weight: bold;
-            margin: 20px 0;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            animation: pulse 2s ease-in-out infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-        }
-        
-        .content {
-            padding: 40px 30px;
-        }
-        
-        .section {
-            margin-bottom: 35px;
-            animation: fadeInUp 0.8s ease-out backwards;
-        }
-        
-        .section:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-        
-        .section:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-        
-        .section:nth-child(4) {
-            animation-delay: 0.6s;
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .section-icon {
-            font-size: 2em;
-            margin-bottom: 10px;
-        }
-        
-        .section h2 {
-            color: #764ba2;
-            font-size: 1.5em;
             margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .section p {
-            color: #555;
-            line-height: 1.8;
-            font-size: 1.1em;
-        }
-        
-        .detail-box {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            padding: 20px;
-            border-radius: 15px;
-            margin-top: 10px;
-            border-left: 5px solid #764ba2;
-        }
-        
-        .detail-box strong {
-            color: #764ba2;
             display: block;
-            margin-bottom: 5px;
+            filter: drop-shadow(0 0 10px rgba(255, 107, 107, 0.5));
+        }
+        
+        .info-label {
+            color: #ff6b6b;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        .info-text {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1em;
+            line-height: 1.8;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .info-text strong {
+            color: #4ecdc4;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.2em;
         }
         
         .map-button {
             display: inline-block;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #ff6b6b 0%, #ffa502 100%);
             color: white;
-            padding: 15px 30px;
+            padding: 15px 35px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: bold;
-            margin-top: 15px;
+            margin-top: 20px;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+            font-size: 1.1em;
+            letter-spacing: 1px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
         }
         
         .map-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.6);
+            box-shadow: 0 15px 35px rgba(255, 107, 107, 0.6);
         }
         
         .footer {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 30px;
+            padding: 40px;
             text-align: center;
-            color: white;
+            background: rgba(255, 107, 107, 0.1);
+            border-top: 2px solid rgba(255, 107, 107, 0.2);
+            position: relative;
         }
         
-        .footer p {
-            font-size: 1.1em;
-            margin-bottom: 10px;
-        }
-        
-        .decorative-line {
-            width: 100px;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #764ba2, transparent);
-            margin: 20px auto;
-        }
-        
-        .confetti {
-            position: fixed;
-            width: 10px;
-            height: 10px;
-            background: #764ba2;
+        .footer::before {
+            content: '';
             position: absolute;
-            animation: confetti-fall 3s linear infinite;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 30px,
+                    rgba(255,255,255,0.02) 30px,
+                    rgba(255,255,255,0.02) 60px
+                );
         }
         
-        @keyframes confetti-fall {
-            to {
-                transform: translateY(100vh) rotate(360deg);
-            }
+        .footer-text {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.3em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
         }
         
-        .rsvp-section {
-            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            margin-top: 20px;
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            animation: sparkle 2s ease-in-out infinite;
+            box-shadow: 0 0 10px rgba(255,255,255,0.8);
         }
         
-        .rsvp-section h3 {
-            color: #2d3436;
-            margin-bottom: 10px;
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
         }
+        
+        .sparkle:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .sparkle:nth-child(2) { top: 20%; right: 15%; animation-delay: 0.5s; }
+        .sparkle:nth-child(3) { top: 60%; left: 20%; animation-delay: 1s; }
+        .sparkle:nth-child(4) { bottom: 20%; right: 25%; animation-delay: 1.5s; }
         
         @media (max-width: 600px) {
-            .header h1 {
+            .container {
+                border-radius: 30px;
+            }
+            
+            .header {
+                padding: 60px 30px 40px;
+            }
+            
+            .event-title {
                 font-size: 2em;
             }
             
-            .age-badge {
-                font-size: 2.5em;
-                padding: 12px 25px;
+            .age-circle {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .age-number {
+                font-size: 3em;
             }
             
             .content {
-                padding: 30px 20px;
+                padding: 40px 25px;
+            }
+            
+            .info-card {
+                padding: 25px;
             }
         }
     </style>
 </head>
 <body>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    
     <div class="container">
         <div class="header">
-            <h1>🎊 You're Invited! 🎊</h1>
-            <p>Perayaan Ulang Tahun</p>
-            <div class="age-badge">20</div>
-            <p>Tahun Penuh Kenangan</p>
+            <div class="decorative-corner corner-tl"></div>
+            <div class="decorative-corner corner-tr"></div>
+            
+            <div class="age-circle">
+                <div class="age-number">20</div>
+            </div>
+            
+            <h1 class="event-title">BIRTHDAY</h1>
+            
+            <div class="decorative-corner corner-bl"></div>
+            <div class="decorative-corner corner-br"></div>
         </div>
         
         <div class="content">
-            <div class="section">
-                <h2><span class="section-icon">🎉</span> Mari Merayakan Bersama!</h2>
-                <p>Dengan penuh kebahagiaan, saya mengundang Anda untuk merayakan ulang tahun ke-20 saya. Mari berbagi kegembiraan, tawa, dan kenangan indah bersama!</p>
-                <div class="decorative-line"></div>
-            </div>
-            
-            <div class="section">
-                <h2><span class="section-icon">📅</span> Waktu Acara</h2>
-                <div class="detail-box">
-                    <strong>Tanggal & Waktu:</strong>
-                    <p>Pukul 18.00 - Selesai</p>
-                    <p style="margin-top: 10px; font-style: italic; color: #764ba2;">
-                        Datang tepat waktu untuk kejutan spesial! ✨
-                    </p>
+            <div class="info-card">
+                <span class="icon">📅</span>
+                <div class="info-label">Date & Time</div>
+                <div class="info-text">
+                    <strong>7 Desember 2025</strong>
+                    18.00 - Selesai
                 </div>
             </div>
             
-            <div class="section">
-                <h2><span class="section-icon">📍</span> Lokasi</h2>
-                <div class="detail-box">
+            <div class="info-card">
+                <span class="icon">📍</span>
+                <div class="info-label">Location</div>
+                <div class="info-text">
                     <strong>The Cups & Co</strong>
-                    <p>Jl. Gunung Krakatau No.25A, Glugur Darat I</p>
-                    <p>Kec. Medan Tim., Kota Medan</p>
-                    <p>Sumatera Utara 20238</p>
+                    Jl. Gunung Krakatau No.25A<br>
+                    Glugur Darat I, Kec. Medan Tim.<br>
+                    Kota Medan, Sumatera Utara 20238
                     <a href="https://www.google.com/maps/search/?api=1&query=The+Cups+%26+Co+Jl.+Gunung+Krakatau+No.25A+Medan" 
                        target="_blank" 
                        class="map-button">
-                        📍 Buka Google Maps
+                        📍 Open Maps
                     </a>
                 </div>
             </div>
             
-            <div class="section">
-                <h2><span class="section-icon">🎁</span> Dress Code</h2>
-                <div class="detail-box">
-                    <strong>Kasual Chic</strong>
-                    <p>Kenakan pakaian favorit Anda dan datang dengan senyuman terbaik! 😊</p>
+            <div class="info-card">
+                <span class="icon">👕</span>
+                <div class="info-label">Dress Code</div>
+                <div class="info-text">
+                    <strong>Pakaian Favorit</strong>
                 </div>
-            </div>
-            
-            <div class="rsvp-section">
-                <h3>🌟 Kehadiran Anda Sangat Berarti 🌟</h3>
-                <p style="color: #2d3436; margin-top: 10px;">
-                    Tanpa kehadiran Anda, perayaan ini tidak akan lengkap!
-                </p>
             </div>
         </div>
         
         <div class="footer">
-            <p style="font-size: 1.3em; margin-bottom: 15px;">✨ Sampai Jumpa di Perayaan! ✨</p>
-            <p style="font-size: 0.9em; opacity: 0.9;">
-                Mari ciptakan kenangan indah bersama 🎂
-            </p>
+            <p class="footer-text">✨ See You There ✨</p>
         </div>
     </div>
 </body>
